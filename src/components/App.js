@@ -19,9 +19,7 @@ class App extends Component {
       const user = parseUrl('user:', 0);
       const repo = parseUrl('repo:', 1).split('&')[0];
       const q = `${user}/${repo}`;
-      this.setState({
-        q
-      });
+      this.setState({ q }, () => this.props.search(this.state.q));
     }
   }
 
@@ -63,9 +61,7 @@ class App extends Component {
         {this.props.isFetching
           ? <Preloader />
           : <ul>
-              {this.props.issues.length > 0
-                ? this.props.issues.map(i => <li><a href="">{i}</a></li>)
-                : null}
+              {this.props.issues.map(i => <li key={i}><a href="">{i}</a></li>)}
             </ul>}
         <ul>
           {pagesArr.map(i => (

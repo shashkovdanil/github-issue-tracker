@@ -22,37 +22,37 @@ const Container = styled.div`
 const Loader = styled.div`
   display: block;
   position: relative;
-  left: 50%;
-  top: 50%;
-  width: 90px;
-  height: 90px;
+  left: ${props => props.positionL};
+  top: ${props => props.positionL};
+  width: ${props => props.size};
+  height: ${props => props.size};
   margin: -45px 0 0 -45px;
   z-index: 1500;
   border: 3px solid transparent;
-  border-top-color: #3f4448;
+  border-top-color: ${props => props.colorL};
   border-radius: 50%;
   animation: ${spin} 2s linear infinite;
   &:before {
     content: "";
     position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
+    top: ${props => props.positionM};
+    left: ${props => props.positionM};
+    right: ${props => props.positionM};
+    bottom: ${props => props.positionM};
     border: 3px solid transparent;
-    border-top-color: #1e2c42;
+    border-top-color: ${props => props.colorM};
     border-radius: 50%;
     animation: ${spin} 3s linear infinite;
   }
   &:after {
     content: "";
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
+    top: ${props => props.positionS};
+    left: ${props => props.positionS};
+    right: ${props => props.positionS};
+    bottom: ${props => props.positionS};
     border: 3px solid transparent;
-    border-top-color: #000;
+    border-top-color: ${props => props.colorS};
     border-radius: 50%;
     animation: ${spin} 1.5s linear infinite;
   }
@@ -60,7 +60,15 @@ const Loader = styled.div`
 
 const Preloader = () => (
   <Container>
-    <Loader />
+    <Loader
+      size="90px"
+      positionL="50%"
+      positionM="5px"
+      positionS="15px"
+      colorL="#3f4448"
+      colorM="#1e2c42"
+      colorS="#000"
+    />
   </Container>
 );
 

@@ -43,7 +43,7 @@ class SearchInput extends PureComponent {
           onChange={onChange}
           value={q}
           type="text"
-          placeholder="repository name..."
+          placeholder="user/repo"
         />
         <ButtonLink to={to} onClick={onClick}>
           <img src={search} alt="search" />
