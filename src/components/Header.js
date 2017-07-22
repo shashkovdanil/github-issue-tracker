@@ -8,12 +8,14 @@ const HeaderContainer = styled.header`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  justify-content: center;
   background-color: #1e2c42;
   height: 5rem;
+  padding: 2rem;
 `;
 
 const HeaderLogo = styled.img`
-  padding: 0.5rem;
+  padding: 0 0.5rem 0 0;
 `;
 
 const HeaderTitle = styled.h1`
