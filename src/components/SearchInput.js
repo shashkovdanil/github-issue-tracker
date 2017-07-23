@@ -6,16 +6,18 @@ import ButtonLink from './ButtonLink';
 import search from '../icons/search.svg';
 
 const Container = styled.div`
-  display: flex;
+  background-color: white;
   width: 30%;
+  @media (max-width: 720px) {
+		width: 60%;
+  }
+  display: flex;
   margin: 2rem auto;
   padding: 0.5rem;
-  border: 1px solid lightgray;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
   transition: all 0.2s ease-in-out;
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, .2), 0 0 0 1px rgba(0, 0, 0, .08);
-  };
+  }
 `;
 
 const Search = styled.input`
@@ -39,7 +41,7 @@ class SearchInput extends PureComponent {
     return (
       <Container>
         <Search
-          innerRef={(input) => { this.searchInput = input; }} 
+          innerRef={(input) => { this.searchInput = input; }}
           onChange={onChange}
           value={q}
           type="text"

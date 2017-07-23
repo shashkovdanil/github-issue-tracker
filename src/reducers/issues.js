@@ -1,7 +1,7 @@
 import * as types from '../constants';
 
 const initialState = {
-  issues: [],
+  issuesList: [],
   isFetching: false,
   perPage: 30,
   page: 1
@@ -15,7 +15,7 @@ const issues = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        issues: action.issues
+        issuesList: action.issues
       }
     default:
       return state;

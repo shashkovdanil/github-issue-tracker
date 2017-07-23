@@ -1,13 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
+import { injectGlobal } from 'styled-components';
 
 import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
 import Root from './containers/Root';
+import globalStyle from './globalStyle';
 
-import './index.css';
+injectGlobal`${globalStyle}`; // eslint-disable-line
 
 const history = createHistory();
 const store = configureStore();

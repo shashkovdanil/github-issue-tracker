@@ -23,5 +23,8 @@ export const searchIssues = (q, page) => dispatch => {
   dispatch(requestIssues());
   return fetch(`https://api.github.com/repos/${q}/issues?${page}`)
     .then(res => res.json())
-    .then(issues => dispatch(receiveIssues(issues)));
+    .then(issues => {
+      dispatch(receiveIssues(issues));
+      dispatch(getCountPages(q));
+    });
 };
