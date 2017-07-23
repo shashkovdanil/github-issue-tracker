@@ -11,8 +11,8 @@ const Root = ({ store, history }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route path="/" component={App} />
-        <Route path="/details/:issue" component={IssueDetails} />
+        <Route exact path="/" component={App} />
+        <Route path="/details/:issue" render={()=><IssueDetails />} />
         <Route path="/about" component={IssueDetails} />
         <DevTools />
       </div>

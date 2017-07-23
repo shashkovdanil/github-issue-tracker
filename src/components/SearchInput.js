@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 
 import ButtonLink from './ButtonLink';
 
@@ -56,4 +55,4 @@ class SearchInput extends PureComponent {
   }
 }
 
-export default withRouter(SearchInput);
+export default SearchInput;
