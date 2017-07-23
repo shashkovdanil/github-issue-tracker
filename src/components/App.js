@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Header from './Header';
 import SearchInput from './SearchInput';
@@ -36,7 +37,7 @@ class App extends Component {
     }
   }
 
-  fetchIssues = (page = null) => {
+  fetchIssues = (page = '') => {
     this.props.search(this.state.q, page);
   };
 
@@ -52,6 +53,7 @@ class App extends Component {
       <div>
         <Header />
         <SearchInput
+          location={this.props.location}
           onChange={this.onChange}
           q={this.state.q}
           onClick={this.fetchIssues}
@@ -60,8 +62,8 @@ class App extends Component {
         {this.props.isFetching
           ? <Preloader />
           : <div>
-              <IssueList />
-              <Pagination activePage={activePage} query={query} />
+              <IssueList location={this.props.location} />
+              <Pagination location={this.props.location} activePage={activePage} query={query} />
             </div>}
       </div>
     );
@@ -79,4 +81,4 @@ const mapDispatchToProps = dispatch => ({
   search: (q, page) => dispatch(actions.searchIssues(q, page))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

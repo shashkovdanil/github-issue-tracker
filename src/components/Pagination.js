@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -57,4 +57,4 @@ const Pagination = ({ pages, query, activePage }) => {
 
 const mapStateToProps = ({ pages }) => ({ pages });
 
-export default connect(mapStateToProps)(Pagination);
+export default withRouter(connect(mapStateToProps)(Pagination));

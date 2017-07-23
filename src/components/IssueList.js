@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, PureComponent } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
@@ -32,27 +32,57 @@ const List = styled.ul`
   background-color: white;
 `;
 
-const IssueList = ({ issues }) => (
-  <Main>
-    <List>
-      <CSSTransitionGroup
-        component="Issue"
-        transitionName="slide"
-        transitionAppear
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        {issues.map(issue => (
-          <Issue key={issue}><StyledLink to={`/${slug(issue)}`}>{issue}</StyledLink></Issue>
-        ))}
-      </CSSTransitionGroup>
-    </List>
-  </Main>
-);
+class IssueList extends PureComponent {
+  render() {
+    return (
+      <Main>
+        <List>
+          <CSSTransitionGroup
+            component="Issue"
+            transitionName="slide"
+            transitionAppear
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+          >
+            {this.props.issues.map(issue =>
+              <Issue key={issue.title}>
+                <StyledLink to={{ pathname: `/details/${slug(issue.number)}` }}>
+                  {issue.title}
+                </StyledLink>
+              </Issue>
+            )}
+          </CSSTransitionGroup>
+        </List>
+      </Main>
+    )
+  }
+}
+
+// const IssueList = ({ issues }) =>
+//   <Main>
+//     <List>
+//       <CSSTransitionGroup
+//         component="Issue"
+//         transitionName="slide"
+//         transitionAppear
+//         transitionAppearTimeout={500}
+//         transitionEnterTimeout={500}
+//         transitionLeaveTimeout={500}
+//       >
+//         {issues.map(issue =>
+//           <Issue key={issue.title}>
+//             <StyledLink to={{ pathname: `/details/${slug(issue.number)}` }}>
+//               {issue.title}
+//             </StyledLink>
+//           </Issue>
+//         )}
+//       </CSSTransitionGroup>
+//     </List>
+//   </Main>;
 
 const mapStateToProps = ({ issues }) => ({
   issues: issues.issuesList
 });
 
-export default connect(mapStateToProps)(IssueList);
+export default withRouter(connect(mapStateToProps)(IssueList));

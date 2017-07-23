@@ -6,7 +6,10 @@ export const requestIssues = () => ({
 
 export const receiveIssues = issues => ({
   type: types.RECEIVE_ISSUES,
-  issues: issues.map(issue => issue.title)
+  issues: issues.map(issue => ({
+    title: issue.title,
+    number: issue.number
+  }))
 });
 
 export const receivePages = pages => ({
