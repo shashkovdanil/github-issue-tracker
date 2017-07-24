@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Header from './Header';
 import SearchInput from './SearchInput';
 import IssueList from './IssueList';
 import Pagination from './Pagination';
@@ -51,7 +50,6 @@ class App extends Component {
     const query = `?q=user:${user}+repo:${repo}`;
     return (
       <div>
-        <Header />
         <SearchInput
           location={this.props.location}
           onChange={this.onChange}
