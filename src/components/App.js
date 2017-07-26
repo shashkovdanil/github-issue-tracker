@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -11,7 +11,7 @@ import Preloader from './Preloader';
 
 import * as actions from '../actions';
 
-class App extends Component {
+class App extends PureComponent {
   static propTypes = {
     q: PropTypes.string,
     page: PropTypes.string,
