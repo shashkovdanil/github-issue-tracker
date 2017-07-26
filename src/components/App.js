@@ -16,7 +16,7 @@ class App extends Component {
     q: PropTypes.string,
     page: PropTypes.string,
     search: PropTypes.func.isRequired,
-    isFetching: PropTypes.boolean.isRequired,
+    isFetching: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
