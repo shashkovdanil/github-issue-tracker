@@ -58,8 +58,8 @@ const Loader = styled.div`
   }
 `;
 
-const Preloader = () => (
-  <Container>
+const Preloader = () =>
+  (<Container>
     <Loader
       size="90px"
       positionL="50%"
@@ -69,7 +69,6 @@ const Preloader = () => (
       colorM="#1e2c42"
       colorS="#000"
     />
-  </Container>
-);
+  </Container>);
 
 export default Preloader;

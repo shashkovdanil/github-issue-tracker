@@ -4,10 +4,10 @@ const initialState = '';
 
 const pages = (state = initialState, action) => {
   if (action.type === types.RECEIVE_PAGES) {
-    return state = Math.ceil(action.pages / 30);
-  } else {
-    return state;
+    const newState = Math.ceil(action.pages / 30);
+    return newState;
   }
+  return state;
 };
 
 export default pages;

@@ -1,25 +1,25 @@
 import * as types from '../constants';
 
 export const requestIssues = () => ({
-  type: types.REQUEST_ISSUES
+  type: types.REQUEST_ISSUES,
 });
 
 export const receiveIssues = issues => ({
   type: types.RECEIVE_ISSUES,
   issues: issues.map(issue => ({
     title: issue.title,
-    number: issue.number
-  }))
+    number: issue.number,
+  })),
 });
 
 export const receivePages = pages => ({
   type: types.RECEIVE_PAGES,
-  pages
+  pages,
 });
 
 export const showError = errMessage => ({
   type: types.SHOW_ERROR,
-  errMessage
+  errMessage,
 });
 
 export const getCountPages = repo => async (dispatch) => {

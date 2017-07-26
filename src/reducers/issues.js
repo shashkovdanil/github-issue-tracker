@@ -4,7 +4,7 @@ const initialState = {
   issuesList: [],
   isFetching: false,
   perPage: 30,
-  page: 1
+  page: 1,
 };
 
 const issues = (state = initialState, action) => {
@@ -15,8 +15,8 @@ const issues = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        issuesList: action.issues
-      }
+        issuesList: action.issues,
+      };
     default:
       return state;
   }

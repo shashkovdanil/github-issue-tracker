@@ -12,10 +12,11 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ButtonLink = ({ to, onClick, children }) => (
-  <Button onClick={onClick}>
-    <Link to={to}>{children}</Link>
-  </Button>
-);
+const ButtonLink = ({ to, onClick, children }) =>
+  (<Button onClick={onClick}>
+    <Link to={to}>
+      {children}
+    </Link>
+  </Button>);
 
 export default ButtonLink;

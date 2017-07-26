@@ -33,7 +33,7 @@ const List = styled.ul`
 `;
 
 const IssueList = ({ issues }) =>
-  <Main>
+  (<Main>
     <List>
       <CSSTransitionGroup
         component="Issue"
@@ -44,18 +44,18 @@ const IssueList = ({ issues }) =>
         transitionLeaveTimeout={500}
       >
         {issues.map(issue =>
-          <Issue key={issue.title}>
+          (<Issue key={issue.title}>
             <StyledLink to={`/details/${slug(issue.number)}`}>
               {issue.title}
             </StyledLink>
-          </Issue>
+          </Issue>),
         )}
       </CSSTransitionGroup>
     </List>
-  </Main>;
+  </Main>);
 
 const mapStateToProps = ({ issues }) => ({
-  issues: issues.issuesList
+  issues: issues.issuesList,
 });
 
 export default connect(mapStateToProps)(IssueList);

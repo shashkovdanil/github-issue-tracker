@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "^4.6.3",
+    "prop-types": "^15.5.10",
     "querystringify": "^1.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -26,6 +27,27 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "redux-devtools": "^3.4.0"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "globals": {
+      "document": true,
+      "fetch": true,
+      "URL": true,
+      "window": true,
+      "navigator": true
+    },
+    "rules": {
+      "react/jsx-filename-extension": 0,
+      "react/no-did-mount-set-state": 0
+    }
   }
 }

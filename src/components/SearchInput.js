@@ -9,7 +9,7 @@ const Container = styled.div`
   background-color: white;
   width: 30%;
   @media (max-width: 720px) {
-		width: 60%;
+    width: 60%;
   }
   display: flex;
   margin: 2rem auto;
@@ -41,7 +41,9 @@ class SearchInput extends PureComponent {
     return (
       <Container>
         <Search
-          innerRef={(input) => { this.searchInput = input; }}
+          innerRef={(input) => {
+            this.searchInput = input;
+          }}
           onChange={onChange}
           value={q}
           type="text"

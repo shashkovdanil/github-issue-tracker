@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'querystringify';
@@ -11,28 +12,38 @@ import Preloader from './Preloader';
 import * as actions from '../actions';
 
 class App extends Component {
+  static propTypes = {
+    q: PropTypes.string,
+    page: PropTypes.string,
+    search: PropTypes.func.isRequired,
+    isFetching: PropTypes.boolean.isRequired,
+  };
+
   static defaultProps = {
-    page: '1'
-  }
+    q: '',
+    page: '1',
+  };
 
   state = {
-    q: ''
+    q: '',
   };
 
   componentDidMount() {
-    const { q, page } = this.props
-    q && this.setState({ q }, () => this.fetchIssues(page));
+    const { q, page } = this.props;
+    if (q) {
+      this.setState({ q }, () => this.fetchIssues(page));
+    }
   }
-
-  onChange = e => {
-    this.setState({ q: e.target.value });
-  };
 
   componentWillReceiveProps({ page, q }) {
     if (this.props.q !== q || this.props.page !== page) {
       this.setState({ q }, () => this.fetchIssues(page));
     }
   }
+
+  onChange = (e) => {
+    this.setState({ q: e.target.value });
+  };
 
   fetchIssues = (page = '1') => {
     this.props.search(this.state.q, page);
@@ -55,15 +66,16 @@ class App extends Component {
         {isFetching
           ? <Preloader />
           : <div>
-              <IssueList />
-              <Pagination activePage={page} query={query} />
-            </div>}
+            <IssueList />
+            <Pagination activePage={page} query={query} />
+          </div>}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+  const { issues, isFetching } = state.issues;
   const parsedUrl = qs.parse(state.router.location.search);
   const page = parsedUrl.page;
   let q = '';
@@ -74,15 +86,14 @@ const mapStateToProps = state => {
   return {
     page,
     q,
-    route: state.router,
-    issues: state.issues.issuesList,
-    isFetching: state.issues.isFetching,
-    pages: state.pages
+    issues,
+    isFetching,
+    pages: state.pages,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  search: (q, page) => dispatch(actions.searchIssues(q, page))
+  search: (q, page) => dispatch(actions.searchIssues(q, page)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

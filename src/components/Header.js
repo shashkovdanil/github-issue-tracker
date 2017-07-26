@@ -14,9 +14,7 @@ const HeaderContainer = styled.header`
   padding: 2rem;
 `;
 
-const HeaderLogo = styled.img`
-  padding: 0 0.5rem 0 0;
-`;
+const HeaderLogo = styled.img`padding: 0 0.5rem 0 0;`;
 
 const HeaderTitle = styled.h1`
   color: #fff;
@@ -24,11 +22,10 @@ const HeaderTitle = styled.h1`
   font-family: 'Noto Sans', sans-serif;
 `;
 
-const Header = () => (
-  <HeaderContainer>
+const Header = () =>
+  (<HeaderContainer>
     <HeaderLogo src={githubLogo} alt="github" />
     <HeaderTitle>Github Issue Tracker</HeaderTitle>
-  </HeaderContainer>
-);
+  </HeaderContainer>);
 
 export default Header;

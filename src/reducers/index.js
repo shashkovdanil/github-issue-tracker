@@ -7,7 +7,7 @@ import pages from './pages';
 const rootReducer = combineReducers({
   router: routerReducer,
   issues,
-  pages
+  pages,
 });
 
 export default rootReducer;

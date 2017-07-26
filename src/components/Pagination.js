@@ -29,7 +29,7 @@ const A = styled(Link)`
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  background-color: ${props => props['data-active'] ? 'aquamarine' : 'white'}
+  background-color: ${props => (props['data-active'] ? 'aquamarine' : 'white')}
 `;
 
 const Pagination = ({ pages, query, activePage }) => {
@@ -42,13 +42,13 @@ const Pagination = ({ pages, query, activePage }) => {
       <PaginationBlock>
         {pages &&
           pagesArr.map(pageNum =>
-            <A
+            (<A
               data-active={+activePage === pageNum}
               key={pageNum}
               to={{ pathname: '/', search: `${query}&page=${pageNum}` }}
             >
               {pageNum}
-            </A>
+            </A>),
           )}
       </PaginationBlock>
     </Wrapper>
