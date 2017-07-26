@@ -43,7 +43,7 @@ const Pagination = ({ pages, query, activePage }) => {
         {pages &&
           pagesArr.map(pageNum =>
             <A
-              data-active={activePage === pageNum}
+              data-active={+activePage === pageNum}
               key={pageNum}
               to={{ pathname: '/', search: `${query}&page=${pageNum}` }}
             >

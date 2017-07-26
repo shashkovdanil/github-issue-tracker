@@ -17,17 +17,25 @@ export const receivePages = pages => ({
   pages
 });
 
-export const getCountPages = repo => dispatch =>
-  fetch(`https://api.github.com/repos/${repo}`)
-    .then(res => res.json())
-    .then(({ open_issues_count }) => dispatch(receivePages(open_issues_count)));
+export const showError = errMessage => ({
+  type: types.SHOW_ERROR,
+  errMessage
+});
 
-export const searchIssues = (q, page) => dispatch => {
+export const getCountPages = repo => async (dispatch) => {
+  const response = await fetch(`https://api.github.com/repos/${repo}`);
+  const { open_issues_count } = await response.json();
+  dispatch(receivePages(open_issues_count));
+};
+
+export const searchIssues = (q, page) => async (dispatch) => {
   dispatch(requestIssues());
-  return fetch(`https://api.github.com/repos/${q}/issues?${page}`)
-    .then(res => res.json())
-    .then(issues => {
-      dispatch(receiveIssues(issues));
-      dispatch(getCountPages(q));
-    });
+  const response = await fetch(`https://api.github.com/repos/${q}/issues?page=${page}`);
+  const json = await response.json();
+  if (response.ok) {
+    dispatch(receiveIssues(json));
+    dispatch(getCountPages(q));
+  } else {
+    dispatch(showError(json.message));
+  }
 };
