@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import issues from './issues';
+import issues from './visibleIssues';
 import pages from './pages';
 
 const rootReducer = combineReducers({

@@ -29,15 +29,15 @@ class App extends PureComponent {
   };
 
   componentDidMount() {
-    const { q, page } = this.props;
+    const { q, page, perPage } = this.props;
     if (q) {
-      this.setState({ q }, () => this.fetchIssues(page));
+      this.setState({ q }, () => this.fetchIssues(page, perPage));
     }
   }
 
-  componentWillReceiveProps({ page, q }) {
-    if (this.props.q !== q || this.props.page !== page) {
-      this.setState({ q }, () => this.fetchIssues(page));
+  componentWillReceiveProps({ page, q, perPage }) {
+    if (this.props.q !== q || this.props.page !== page || this.props.perPage !== perPage) {
+      this.setState({ q }, () => this.fetchIssues(page, perPage));
     }
   }
 
@@ -45,8 +45,12 @@ class App extends PureComponent {
     this.setState({ q: e.target.value });
   };
 
-  fetchIssues = (page = '1') => {
-    this.props.search(this.state.q, page);
+  fetchIssues = (page = '1', perPage) => {
+    this.props.search(this.state.q, page, perPage);
+  };
+
+  changeQtyIssuesOnPage = e => {
+    this.props.changeQtyIssuesOnPage(e.target.value);
   };
 
   render() {
@@ -59,6 +63,8 @@ class App extends PureComponent {
       <div>
         <SearchInput
           onChange={this.onChange}
+          changePerPage={this.changeQtyIssuesOnPage}
+          perPage={this.props.perPage}
           q={q}
           onClick={this.fetchIssues}
           to={{ pathname: '/', search: query }}
@@ -75,7 +81,7 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const { issues, isFetching } = state.issues;
+  const { issues, isFetching, perPage } = state.issues;
   const parsedUrl = qs.parse(state.router.location.search);
   const page = parsedUrl.page;
   let q = '';
@@ -88,12 +94,14 @@ const mapStateToProps = (state) => {
     q,
     issues,
     isFetching,
+    perPage,
     pages: state.pages,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  search: (q, page) => dispatch(actions.searchIssues(q, page)),
+  search: (q, page, perPage) => dispatch(actions.searchIssues(q, page, perPage)),
+  changeQtyIssuesOnPage: perPage => dispatch(actions.changeQtyIssuesOnPage(perPage))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -4,7 +4,7 @@ const initialState = {
   issuesList: [],
   isFetching: false,
   perPage: 30,
-  page: 1,
+  error: ''
 };
 
 const issues = (state = initialState, action) => {
@@ -17,6 +17,11 @@ const issues = (state = initialState, action) => {
         isFetching: false,
         issuesList: action.issues,
       };
+    case types.CHANGE_QTY_ISSUES_ON_PAGE:
+      return {
+        ...state,
+        perPage: action.perPage
+      }
     default:
       return state;
   }

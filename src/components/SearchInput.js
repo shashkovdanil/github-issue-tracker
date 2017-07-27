@@ -32,16 +32,20 @@ const Search = styled.input`
 `;
 
 class SearchInput extends PureComponent {
+  state = {
+    perPage: '30'
+  };
+
   componentDidMount() {
     this.searchInput.focus();
   }
 
   render() {
-    const { q, onChange, to, onClick } = this.props;
+    const { q, onChange, to, onClick, changePerPage, perPage } = this.props;
     return (
       <Container>
         <Search
-          innerRef={(input) => {
+          innerRef={input => {
             this.searchInput = input;
           }}
           onChange={onChange}
@@ -52,6 +56,11 @@ class SearchInput extends PureComponent {
         <ButtonLink to={to} onClick={onClick}>
           <img src={search} alt="search" />
         </ButtonLink>
+        <select onChange={changePerPage} defaultValue="30" value={perPage}>
+          <option value="10">10</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
       </Container>
     );
   }

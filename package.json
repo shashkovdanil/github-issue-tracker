@@ -27,27 +27,13 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
+    "babel-eslint": "7.2.3",
+    "eslint": "3.19.0",
+    "eslint-config-react-app": "^1.0.5",
+    "eslint-plugin-flowtype": "2.33.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "5.0.1",
+    "eslint-plugin-react": "7.0.1",
     "redux-devtools": "^3.4.0"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "globals": {
-      "document": true,
-      "fetch": true,
-      "URL": true,
-      "window": true,
-      "navigator": true
-    },
-    "rules": {
-      "react/jsx-filename-extension": 0,
-      "react/no-did-mount-set-state": 0
-    }
   }
 }

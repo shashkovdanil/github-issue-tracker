@@ -12,9 +12,10 @@ export const receiveIssues = issues => ({
   })),
 });
 
-export const receivePages = pages => ({
+export const receivePages = (pages, perPage) => ({
   type: types.RECEIVE_PAGES,
   pages,
+  perPage
 });
 
 export const showError = errMessage => ({
@@ -28,9 +29,9 @@ export const getCountPages = repo => async (dispatch) => {
   dispatch(receivePages(open_issues_count));
 };
 
-export const searchIssues = (q, page) => async (dispatch) => {
+export const searchIssues = (q, page, perPage) => async (dispatch) => {
   dispatch(requestIssues());
-  const response = await fetch(`https://api.github.com/repos/${q}/issues?page=${page}`);
+  const response = await fetch(`https://api.github.com/repos/${q}/issues?page=${page}&per_page=${perPage}`);
   const json = await response.json();
   if (response.ok) {
     dispatch(receiveIssues(json));
@@ -39,3 +40,8 @@ export const searchIssues = (q, page) => async (dispatch) => {
     dispatch(showError(json.message));
   }
 };
+
+export const changeQtyIssuesOnPage = perPage => ({
+  type: types.CHANGE_QTY_ISSUES_ON_PAGE,
+  perPage
+});
