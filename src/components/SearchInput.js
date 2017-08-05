@@ -42,6 +42,7 @@ class SearchInput extends PureComponent {
 
   render() {
     const { q, onChange, to, onClick, changePerPage, perPage } = this.props;
+    console.log(to);
     return (
       <Container>
         <Search
@@ -56,11 +57,6 @@ class SearchInput extends PureComponent {
         <ButtonLink to={to} onClick={onClick}>
           <img src={search} alt="search" />
         </ButtonLink>
-        <select onChange={changePerPage} defaultValue="30" value={perPage}>
-          <option value="10">10</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-        </select>
       </Container>
     );
   }

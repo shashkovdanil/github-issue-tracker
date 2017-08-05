@@ -8,6 +8,7 @@ import SearchInput from './SearchInput';
 import IssueList from './IssueList';
 import Pagination from './Pagination';
 import Preloader from './Preloader';
+import PerPageBlock from './PerPageBlock';
 
 import * as actions from '../actions';
 
@@ -45,8 +46,10 @@ class App extends PureComponent {
     this.setState({ q: e.target.value });
   };
 
-  fetchIssues = (page = '1', perPage) => {
-    this.props.search(this.state.q, page, perPage);
+  fetchIssues = (page = '1', perPage = '30') => {
+    if (this.state.q !== '') {
+      this.props.search(this.state.q, page, perPage);
+    }
   };
 
   changeQtyIssuesOnPage = e => {
@@ -55,10 +58,13 @@ class App extends PureComponent {
 
   render() {
     const { q } = this.state;
-    const { isFetching, page } = this.props;
-    const user = q.split('/')[0];
-    const repo = q.split('/')[1];
-    const query = `?q=user:${user}+repo:${repo}`;
+    const { isFetching, page, perPage } = this.props;
+    let query = ''
+    if (q !== '') {
+      const user = q.split('/')[0];
+      const repo = q.split('/')[1];
+      query = `?q=user:${user}+repo:${repo}`;
+    }
     return (
       <div>
         <SearchInput
@@ -72,8 +78,9 @@ class App extends PureComponent {
         {isFetching
           ? <Preloader />
           : <div>
+            <PerPageBlock activePage={perPage} query={query} />
             <IssueList />
-            <Pagination activePage={page} query={query} />
+            <Pagination activePage={page} query={query} perPage={perPage} />
           </div>}
       </div>
     );
@@ -81,9 +88,10 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const { issues, isFetching, perPage } = state.issues;
+  const { issues, isFetching } = state.issues;
   const parsedUrl = qs.parse(state.router.location.search);
   const page = parsedUrl.page;
+  const perPage = parsedUrl.per_page
   let q = '';
   if (parsedUrl.q) {
     // ?q=user:user+repo:repo => user/repo

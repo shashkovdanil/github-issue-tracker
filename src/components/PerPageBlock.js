@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
 import { urlHelper } from '../utils';
 
@@ -34,29 +33,20 @@ const A = styled(Link)`
   background-color: ${props => (props['data-active'] ? 'aquamarine' : 'white')}
 `;
 
-const Pagination = ({ pages, query, activePage, perPage }) => {
-  const pagesArr = [];
-  for (let i = 1; i <= pages; i += 1) {
-    pagesArr.push(i);
-  }
+const PerPageBlock = ({ query, activePage }) => {
+  const perPage = [10, 30, 50]
   return (
     <Wrapper>
       <PaginationBlock>
-        {pages &&
-          pagesArr.map(pageNum =>
-            (<A
-              data-active={+activePage === pageNum}
-              key={pageNum}
-              to={urlHelper(query, pageNum, perPage)}
-            >
-              {pageNum}
-            </A>),
-          )}
+        {perPage.map(i => <A
+          data-active={+activePage === i}
+          to={urlHelper(query, 1, i)}
+        >
+          {i}
+        </A>)}
       </PaginationBlock>
     </Wrapper>
   );
 };
 
-const mapStateToProps = ({ pages }) => ({ pages });
-
-export default connect(mapStateToProps)(Pagination);
+export default PerPageBlock;

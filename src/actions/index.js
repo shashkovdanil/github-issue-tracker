@@ -45,3 +45,11 @@ export const changeQtyIssuesOnPage = perPage => ({
   type: types.CHANGE_QTY_ISSUES_ON_PAGE,
   perPage
 });
+
+export const changeUrl = (user, repo, page, perPage) => ({
+  type: types.CHANGE_URL,
+  user,
+  repo,
+  page,
+  perPage
+})
