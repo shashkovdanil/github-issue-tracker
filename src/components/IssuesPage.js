@@ -79,7 +79,7 @@ class IssuesPage extends PureComponent {
           </ErrorMessage>
         : <Wrapper visible={issuesList.length > 0 && q}>
             <PerPage active={perPage} query={query} />
-            <IssuesList />
+            <IssuesList query={query} />
             <Pagination active={page} query={query} perPage={perPage} />
           </Wrapper>;
     return (

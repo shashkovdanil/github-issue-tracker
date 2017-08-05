@@ -3,10 +3,12 @@ import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 
-import IssueDetails from './IssueDetails'
-import Header from '../components/Header'
-import Main from './Main'
 import DevTools from './DevTools'
+
+import Header from '../components/Header'
+
+import Main from './Main'
+import Details from './Details'
 
 const Root = ({ store, history }) => (
   <Provider store={store}>
@@ -14,7 +16,7 @@ const Root = ({ store, history }) => (
       <div>
         <Header />
         <Route exact path='/' component={Main} />
-        <Route path='/details/:issue' render={() => <IssueDetails />} />
+        <Route path='/details/:issue' component={Details} />
         <DevTools />
       </div>
     </ConnectedRouter>

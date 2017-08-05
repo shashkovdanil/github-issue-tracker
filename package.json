@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "date-fns": "^1.28.5",
     "history": "^4.6.3",
     "prop-types": "^15.5.10",
     "querystringify": "^1.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-markdown": "^2.5.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
     "react-router-redux": "next",

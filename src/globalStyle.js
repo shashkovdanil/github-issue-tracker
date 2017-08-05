@@ -6,8 +6,12 @@ const globalStyle = `
     background-color: ghostwhite;
   }
 
+  img {
+    max-width: 70%;
+  }
+
   .fade-appear {
-      transform: opacity: 0;
+    opacity: 0;
   }
 
   .fade-appear.fade-appear-active {

@@ -3,11 +3,13 @@ import { routerReducer } from 'react-router-redux';
 
 import issues from './visibleIssues';
 import pages from './pages';
+import details from './details';
 
 const rootReducer = combineReducers({
   router: routerReducer,
   issues,
-  pages
+  pages,
+  details
 });
 
 export default rootReducer;
