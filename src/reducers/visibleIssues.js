@@ -3,7 +3,6 @@ import * as types from '../constants';
 const initialState = {
   issuesList: [],
   isFetching: false,
-  perPage: 30,
   error: ''
 };
 
@@ -17,10 +16,12 @@ const issues = (state = initialState, action) => {
         isFetching: false,
         issuesList: action.issues,
       };
-    case types.CHANGE_QTY_ISSUES_ON_PAGE:
+    case types.SHOW_ERROR:
+      const notFound = action.errMessage === 'Not Found' && 'По вашему запросу ничего не найдено'
       return {
         ...state,
-        perPage: action.perPage
+        isFetching: false,
+        error: notFound || action.errMessage
       }
     default:
       return state;

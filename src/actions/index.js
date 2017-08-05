@@ -23,10 +23,10 @@ export const showError = errMessage => ({
   errMessage,
 });
 
-export const getCountPages = repo => async (dispatch) => {
+export const getCountPages = (repo, perPage) => async (dispatch) => {
   const response = await fetch(`https://api.github.com/repos/${repo}`);
   const { open_issues_count } = await response.json();
-  dispatch(receivePages(open_issues_count));
+  dispatch(receivePages(open_issues_count, perPage));
 };
 
 export const searchIssues = (q, page, perPage) => async (dispatch) => {
@@ -35,7 +35,7 @@ export const searchIssues = (q, page, perPage) => async (dispatch) => {
   const json = await response.json();
   if (response.ok) {
     dispatch(receiveIssues(json));
-    dispatch(getCountPages(q));
+    dispatch(getCountPages(q, perPage));
   } else {
     dispatch(showError(json.message));
   }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import slug from 'slug';
 
 const Issue = styled.li`
   font-family: 'Lato', sans-serif;
@@ -32,12 +31,12 @@ const List = styled.ul`
   background-color: white;
 `;
 
-const IssueList = ({ issues }) =>
+const IssuesList = ({ issues }) =>
   (<Main>
     <List>
       <CSSTransitionGroup
         component="Issue"
-        transitionName="slide"
+        transitionName="fade"
         transitionAppear
         transitionAppearTimeout={500}
         transitionEnterTimeout={500}
@@ -45,7 +44,7 @@ const IssueList = ({ issues }) =>
       >
         {issues.map(issue =>
           (<Issue key={issue.title}>
-            <StyledLink to={`/details/${slug(issue.number)}`}>
+            <StyledLink to={`/details/${issue.number}`}>
               {issue.title}
             </StyledLink>
           </Issue>),
@@ -58,4 +57,4 @@ const mapStateToProps = ({ issues }) => ({
   issues: issues.issuesList,
 });
 
-export default connect(mapStateToProps)(IssueList);
+export default connect(mapStateToProps)(IssuesList);

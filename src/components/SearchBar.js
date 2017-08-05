@@ -5,7 +5,7 @@ import ButtonLink from './ButtonLink';
 
 import search from '../icons/search.svg';
 
-const Container = styled.div`
+const Wrapper = styled.div`
   background-color: white;
   width: 30%;
   @media (max-width: 720px) {
@@ -20,7 +20,7 @@ const Container = styled.div`
   }
 `;
 
-const Search = styled.input`
+const Input = styled.input`
   font-size: 1rem;
   font-family: 'Noto Sans', sans-serif;
   width: 100%;
@@ -32,20 +32,15 @@ const Search = styled.input`
 `;
 
 class SearchInput extends PureComponent {
-  state = {
-    perPage: '30'
-  };
-
   componentDidMount() {
     this.searchInput.focus();
   }
 
   render() {
-    const { q, onChange, to, onClick, changePerPage, perPage } = this.props;
-    console.log(to);
+    const { q, onChange, to, onClick } = this.props;
     return (
-      <Container>
-        <Search
+      <Wrapper>
+        <Input
           innerRef={input => {
             this.searchInput = input;
           }}
@@ -57,7 +52,7 @@ class SearchInput extends PureComponent {
         <ButtonLink to={to} onClick={onClick}>
           <img src={search} alt="search" />
         </ButtonLink>
-      </Container>
+      </Wrapper>
     );
   }
 }

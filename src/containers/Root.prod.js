@@ -3,13 +3,13 @@ import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 
-import App from '../components/App'
+import Main from '../Main'
 
 const Root = ({ store, history }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route path='/' component={App} />
+        <Route path='/' component={Main} />
       </div>
     </ConnectedRouter>
   </Provider>

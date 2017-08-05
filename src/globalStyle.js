@@ -6,13 +6,13 @@ const globalStyle = `
     background-color: ghostwhite;
   }
 
-  .slide-appear {
-      transform: translateX(-100%);
+  .fade-appear {
+      transform: opacity: 0;
   }
 
-  .slide-appear.slide-appear-active {
-      transform: translateX(0);
-      transition: all .5s;
+  .fade-appear.fade-appear-active {
+    opacity: 1;
+    transition: all .5s;
   }
 `;
 

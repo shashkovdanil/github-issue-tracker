@@ -1,59 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
+
+import PerPageAndPagination from './PerPageAndPagination';
+import PageUnit from './PageUnit';
 
 import { urlHelper } from '../utils';
 
-const Wrapper = styled.div`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  box-sizing: border-box;
-`;
-
-const PaginationBlock = styled.div`
-  display: inline-block;
-  box-sizing: border-box;
-  background-color: white;
-`;
-
-const A = styled(Link)`
-  position: relative;
-  float: left;
-  padding: 7px 12px;
-  margin-left: -1px;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  color: #1e2c42;
-  text-decoration: none;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: ${props => (props['data-active'] ? 'aquamarine' : 'white')}
-`;
-
-const Pagination = ({ pages, query, activePage, perPage }) => {
+const Pagination = ({ pages, query, active, perPage }) => {
   const pagesArr = [];
   for (let i = 1; i <= pages; i += 1) {
     pagesArr.push(i);
   }
   return (
-    <Wrapper>
-      <PaginationBlock>
-        {pages &&
-          pagesArr.map(pageNum =>
-            (<A
-              data-active={+activePage === pageNum}
-              key={pageNum}
-              to={urlHelper(query, pageNum, perPage)}
-            >
-              {pageNum}
-            </A>),
-          )}
-      </PaginationBlock>
-    </Wrapper>
+    <PerPageAndPagination>
+      {pages &&
+        pagesArr.map(pageNum =>
+          <PageUnit active={+active === pageNum} key={pageNum} to={urlHelper(query, pageNum, perPage)}>
+            {pageNum}
+          </PageUnit>
+        )}
+    </PerPageAndPagination>
   );
 };
 
