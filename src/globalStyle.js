@@ -6,8 +6,14 @@ const globalStyle = `
     background-color: ghostwhite;
   }
 
-  img {
-    max-width: 70%;
+  .markdown {
+    img {
+      max-width: 70%;
+    }
+    div {
+      width: 100%;
+      overflow: auto;
+    }
   }
 
   .fade-appear {
@@ -18,6 +24,6 @@ const globalStyle = `
     opacity: 1;
     transition: all .5s;
   }
-`;
+`
 
-export default globalStyle;
+export default globalStyle

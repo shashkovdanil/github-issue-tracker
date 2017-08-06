@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+// @flow
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Button = styled.button`
   width: 2rem;
@@ -10,13 +11,18 @@ const Button = styled.button`
   padding: 0;
   margin: 0;
   cursor: pointer;
-`;
+`
 
-const ButtonLink = ({ to, onClick, children }) =>
-  (<Button onClick={onClick}>
+type Props = {
+  to: { pathname: string, search: string },
+  children: any
+}
+
+const ButtonLink = ({ to, children }: Props) =>
+  (<Button>
     <Link to={to}>
       {children}
     </Link>
-  </Button>);
+  </Button>)
 
-export default ButtonLink;
+export default ButtonLink

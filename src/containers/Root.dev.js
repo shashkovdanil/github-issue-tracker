@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
@@ -10,7 +11,7 @@ import Header from '../components/Header'
 import Main from './Main'
 import Details from './Details'
 
-const Root = ({ store, history }) => (
+const Root = ({ store, history }: Object) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>

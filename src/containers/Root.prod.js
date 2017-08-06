@@ -8,7 +8,7 @@ import Header from '../components/Header'
 import Main from './Main'
 import Details from './Details'
 
-const Root = ({ store, history }) => (
+const Root = ({ store, history }: Object) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>

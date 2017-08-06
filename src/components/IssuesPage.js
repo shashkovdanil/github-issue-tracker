@@ -1,16 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+// @flow
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 
-import SearchBar from './SearchBar';
-import PerPage from './PerPage';
-import IssuesList from './IssuesList';
-import Pagination from './Pagination';
-import Preloader from './Preloader';
+import SearchBar from './SearchBar'
+import PerPage from './PerPage'
+import IssuesList from './IssuesList'
+import Pagination from './Pagination'
+import Preloader from './Preloader'
 
 const Wrapper = styled.div`
-  display: ${props => (props.visible ? 'block' : 'none')}
-`;
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  width: 100%;
+  overflow: hidden;
+`
 
 const ErrorMessage = styled.p`
   font-family: 'Noto Sans', sans-serif;
@@ -18,13 +20,18 @@ const ErrorMessage = styled.p`
   font-size: 1.2rem;
 `
 
+type Props = {
+  q: string,
+  page: string,
+  perPage: string,
+  search: (q: string, page: string, perPage: string) => any,
+  error: string,
+  issuesList: Array<Object>,
+  isFetching: boolean
+}
+
 class IssuesPage extends PureComponent {
-  static propTypes = {
-    q: PropTypes.string,
-    page: PropTypes.string,
-    search: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired
-  };
+  props: Props
 
   static defaultProps = {
     q: '',
@@ -36,41 +43,37 @@ class IssuesPage extends PureComponent {
     q: ''
   };
 
-  componentDidMount() {
-    const { q, page, perPage } = this.props;
+  componentDidMount () {
+    const { q, page, perPage } = this.props
     if (q) {
-      this.setState({ q }, () => this.fetchIssues(page, perPage));
+      this.setState({ q }, () => this.fetchIssues(page, perPage))
     }
   }
 
-  componentWillReceiveProps({ page, q, perPage }) {
+  componentWillReceiveProps ({ page, q, perPage }: Props) {
     if (this.props.q !== q || this.props.page !== page || this.props.perPage !== perPage) {
-      this.setState({ q }, () => this.fetchIssues(page, perPage));
+      this.setState({ q }, () => this.fetchIssues(page, perPage))
     }
   }
 
-  onChange = e => {
-    this.setState({ q: e.target.value });
+  onChange = (e: Object) => {
+    this.setState({ q: e.target.value })
   };
 
-  fetchIssues = (page, perPage) => {
+  fetchIssues = (page: string, perPage: string) => {
     if (this.state.q !== '') {
-      this.props.search(this.state.q, page, perPage);
+      this.props.search(this.state.q, page, perPage)
     }
   };
 
-  changeQtyIssuesOnPage = e => {
-    this.props.changeQtyIssuesOnPage(e.target.value);
-  };
-
-  render() {
-    const { q } = this.state;
-    const { isFetching, page, perPage, error, issuesList } = this.props;
-    let query = '';
+  render () {
+    const { q } = this.state
+    const { isFetching, page, perPage, error, issuesList } = this.props
+    let query = ''
     if (q !== '') {
-      const user = q.split('/')[0];
-      const repo = q.split('/')[1];
-      query = `?q=user:${user}+repo:${repo}`;
+      const user = q.split('/')[0]
+      const repo = q.split('/')[1]
+      query = `?q=user:${user}+repo:${repo}`
     }
     const content =
       error !== ''
@@ -81,12 +84,11 @@ class IssuesPage extends PureComponent {
             <PerPage active={perPage} query={query} />
             <IssuesList query={query} />
             <Pagination active={page} query={query} perPage={perPage} />
-          </Wrapper>;
+          </Wrapper>
     return (
       <div>
         <SearchBar
           onChange={this.onChange}
-          changePerPage={this.changeQtyIssuesOnPage}
           perPage={this.props.perPage}
           q={q}
           to={{ pathname: '/', search: query }}
@@ -95,8 +97,8 @@ class IssuesPage extends PureComponent {
           ? <Preloader />
           : content}
       </div>
-    );
+    )
   }
 }
 
-export default IssuesPage;
+export default IssuesPage

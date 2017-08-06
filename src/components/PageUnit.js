@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+// @flow
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const A = styled(Link)`
   position: relative;
@@ -15,12 +16,18 @@ const A = styled(Link)`
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  background-color: ${props => (props['data-active'] ? 'aquamarine' : 'white')}
-`;
+  background-color: ${(props) => (props['data-active'] ? 'aquamarine' : 'white')};
+`
 
-const PageUnit = ({ to, active, children }) =>
+type Props = {
+  to: { pathname: string, search: string },
+  active: boolean,
+  children: any
+}
+
+const PageUnit = ({ to, active, children }: Props) =>
   <A data-active={active} to={to}>
     {children}
-  </A>;
+  </A>
 
 export default PageUnit

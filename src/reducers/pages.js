@@ -1,13 +1,14 @@
-import * as types from '../constants';
+// @flow
+import * as types from '../constants'
 
-const initialState = '';
+const initialState = ''
 
-const pages = (state = initialState, action) => {
+const pages = (state: string = initialState, action: Object) => {
   if (action.type === types.RECEIVE_PAGES) {
-    const newState = Math.ceil(action.pages / action.perPage);
-    return newState;
+    const newState = Math.ceil(action.pages / action.perPage)
+    return newState
   }
-  return state;
-};
+  return state
+}
 
-export default pages;
+export default pages

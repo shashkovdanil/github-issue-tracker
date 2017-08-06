@@ -1,49 +1,75 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
+// @flow
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 
-import Preloader from './Preloader';
+import Preloader from './Preloader'
 
-const Wrapper = styled.main`padding: 2rem;`;
+const Wrapper = styled.main`
+  width: 80%;
+  margin: 2rem 10%;
+`
 
 const Author = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const Avatar = styled.img`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-`;
+`
 const Name = styled.a`
   color: #1e2c42;
   text-decoration: none;
   font-size: 1.2rem;
+
   &:hover {
     text-decoration: underline;
   }
-`;
+`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: 'Lato', sans-serif;
-`;
+`
 const Title = styled.h2`
   font-family: 'Noto Sans', sans-serif;
   text-align: center;
-  margin: 2rem 0 2rem 0;
-`;
+  margin: 2rem 0;
+  word-wrap: break-word;
+`
+type Props = {
+  fetchDetails: (repo: string, issueId: string) => any,
+  repo: string,
+  match: {
+    params: {
+      issue: string
+    }
+  },
+  details: {
+    url: string,
+    avatar: string,
+    name: string,
+    title: string,
+    content: string,
+    isFetching: boolean
+  }
+}
 
 class DetailsPage extends PureComponent {
-  componentDidMount() {
-    const { fetchDetails, repo, match } = this.props;
-    fetchDetails(repo, match.params.issue);
+  props: Props
+
+  componentDidMount () {
+    const { fetchDetails, repo, match } = this.props
+    fetchDetails(repo, match.params.issue)
   }
-  render() {
+
+  render () {
     const { url, avatar, name, title, content, isFetching } = this.props.details
     return isFetching
       ? <Preloader />
@@ -59,11 +85,11 @@ class DetailsPage extends PureComponent {
           <Title>
             {title}
           </Title>
-          <Content>
+          <Content className="markdown">
             <ReactMarkdown source={content || ''} />
           </Content>
-        </Wrapper>;
+        </Wrapper>
   }
 }
 
-export default DetailsPage;
+export default DetailsPage

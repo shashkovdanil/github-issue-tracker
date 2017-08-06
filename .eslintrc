@@ -1,3 +1,31 @@
 {
-  "extends": "react-app"
+  "parser": "babel-eslint",
+  "extends": ["standard", "plugin:react/recommended"],
+  "plugins": ["flowtype"],
+  "settings": {
+    "import/resolver": "node"
+  },
+  "globals": {
+    "fetch": true,
+    "URL": true,
+    "React$Component": true
+  },
+  "rules": {
+    "no-console": "error",
+    "max-len": [
+      "error",
+      120,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "arrow-parens": ["error", "always"],
+    "prefer-const": ["error"],
+    "prefer-arrow-callback": ["error"],
+    "arrow-body-style": ["error", "as-needed"]
+  }
 }

@@ -1,21 +1,27 @@
-import React from 'react';
+// @flow
+import React from 'react'
 
-import PerPageAndPagination from './PerPageAndPagination';
-import PageUnit from './PageUnit';
+import PerPageAndPagination from './PerPageAndPagination'
+import PageUnit from './PageUnit'
 
-import { urlHelper } from '../utils';
+import { urlHelper } from '../utils'
 
-const PerPageBlock = ({ query, active }) => {
-  const perPage = [10, 30, 50];
+type Props = {
+  query: string,
+  active: string
+}
+
+const PerPageBlock = ({ query, active }: Props) => {
+  const perPage = [10, 30, 50]
   return (
     <PerPageAndPagination>
-      {perPage.map(qty =>
+      {perPage.map((qty) =>
         <PageUnit active={+active === qty} to={urlHelper(query, 1, qty)} key={qty}>
           {qty}
         </PageUnit>
       )}
     </PerPageAndPagination>
-  );
-};
+  )
+}
 
-export default PerPageBlock;
+export default PerPageBlock
