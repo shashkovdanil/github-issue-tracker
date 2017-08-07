@@ -9,13 +9,14 @@ import DetailsPage from '../components/DetailsPage'
 import * as actions from '../actions'
 
 const mapStateToProps = (state: Object) => {
-  const { details, isFetching } = state.details
+  const { details, isFetching, error } = state.details
   const parsedUrl = qs.parse(state.router.location.search)
   const repo = parsedUrl.q.split(' ').map((i) => i.split(':')[1]).join().replace(',', '/')
   return {
     repo,
     details,
-    isFetching
+    isFetching,
+    error
   }
 }
 

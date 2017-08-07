@@ -2,8 +2,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import PerPageAndPagination from './PerPageAndPagination'
-import PageUnit from './PageUnit'
+import PerPageAndPagination from './common/PerPageAndPagination'
+import PageUnit from './common/PageUnit'
 
 import { urlHelper } from '../utils'
 

@@ -15,7 +15,15 @@ const issues = (state: Object = initialState, action: Object) => {
       return {
         ...state,
         isFetching: false,
-        issuesList: action.issues
+        issuesList: action.issues.map((issue) => ({
+          title: issue.title,
+          number: issue.number,
+          createdAt: issue.created_at,
+          user: {
+            avatar: issue.user.avatar_url,
+            url: issue.user.html_url
+          }
+        }))
       }
     case types.SHOW_ERROR:
       const notFound = action.errMessage === 'Not Found' && 'По вашему запросу ничего не найдено'
