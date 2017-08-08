@@ -2,10 +2,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { CSSTransitionGroup } from 'react-transition-group'
 import styled from 'styled-components'
 import format from 'date-fns/format'
-
-import AnimatedContainer from './common/AnimatedContainer'
 
 const Issue = styled.li`
   display: flex;
@@ -77,7 +76,14 @@ type Props = {
 const IssuesList = ({ issues, query }: Props) =>
   <Main>
     <List>
-      <AnimatedContainer component="Issue" animationName="fade">
+      <CSSTransitionGroup
+        component="Issue"
+        transitionName="fade"
+        transitionAppear
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+      >
         {issues.map((issue) =>
           <Issue key={issue.title}>
             <WrapperAvatarAndTitle>
@@ -91,7 +97,7 @@ const IssuesList = ({ issues, query }: Props) =>
             <Description>{`#${issue.number} opened on ${format(issue.createdAt, 'Do MMM')}`}</Description>
           </Issue>
         )}
-      </AnimatedContainer>
+      </CSSTransitionGroup>
     </List>
   </Main>
 

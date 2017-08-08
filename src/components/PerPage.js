@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 
-import PerPageAndPagination from './common/PerPageAndPagination'
-import PageUnit from './common/PageUnit'
+import PerPageAndPagination from './PerPageAndPagination'
+import PageUnit from './PageUnit'
 
 import { urlHelper } from '../utils'
 

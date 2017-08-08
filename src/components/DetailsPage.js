@@ -3,9 +3,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 
-import AnimatedContainer from './common/AnimatedContainer'
-import Preloader from './common/Preloader'
-import Error from './common/Error'
+import Preloader from './Preloader'
 
 const Wrapper = styled.main`
   width: 80%;
@@ -53,14 +51,13 @@ type Props = {
       issue: string
     }
   },
-  isFetching: boolean,
-  error: string,
   details: {
     url: string,
     avatar: string,
     name: string,
     title: string,
-    content: string
+    content: string,
+    isFetching: boolean
   }
 }
 
@@ -73,13 +70,10 @@ class DetailsPage extends PureComponent {
   }
 
   render () {
-    const { isFetching, error } = this.props
-    const { url, avatar, name, title, content } = this.props.details
-    if (error) return <Error>{error}</Error>
-    if (isFetching) return <Preloader />
-    return (
-      <AnimatedContainer component="Wrapper" animationName="fade">
-        <Wrapper>
+    const { url, avatar, name, title, content, isFetching } = this.props.details
+    return isFetching
+      ? <Preloader />
+      : <Wrapper>
           <Author>
             <a href={url}>
               <Avatar src={avatar} alt={name} />
@@ -95,8 +89,6 @@ class DetailsPage extends PureComponent {
             <ReactMarkdown source={content || ''} />
           </Content>
         </Wrapper>
-      </AnimatedContainer>
-    )
   }
 }
 

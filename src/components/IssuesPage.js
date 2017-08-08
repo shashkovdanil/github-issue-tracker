@@ -6,13 +6,18 @@ import SearchBar from './SearchBar'
 import PerPage from './PerPage'
 import IssuesList from './IssuesList'
 import Pagination from './Pagination'
-import Preloader from './common/Preloader'
-import Error from './common/Error'
+import Preloader from './Preloader'
 
 const Wrapper = styled.div`
   display: ${(props) => (props.visible ? 'block' : 'none')};
   width: 100%;
   overflow: hidden;
+`
+
+const ErrorMessage = styled.p`
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;
+  font-size: 1.2rem;
 `
 
 type Props = {
@@ -32,88 +37,65 @@ class IssuesPage extends PureComponent {
     q: '',
     page: '1',
     perPage: '30'
-  }
+  };
 
   state = {
-    user: '',
-    repo: '',
-    autocompleteRepos: []
-  }
+    q: ''
+  };
 
   componentDidMount () {
     const { q, page, perPage } = this.props
     if (q) {
-      const user = q.split('/')[0]
-      const repo = q.split('/')[1]
-      this.setState({ user, repo }, () => this.fetchIssues(page, perPage))
+      this.setState({ q }, () => this.fetchIssues(page, perPage))
     }
   }
 
   componentWillReceiveProps ({ page, q, perPage }: Props) {
     if (this.props.q !== q || this.props.page !== page || this.props.perPage !== perPage) {
-      const user = q.split('/')[0]
-      const repo = q.split('/')[1]
-      this.setState({ user, repo }, () => this.fetchIssues(page, perPage))
+      this.setState({ q }, () => this.fetchIssues(page, perPage))
     }
   }
 
-  changeUser = (e: Object) => {
-    this.setState({ user: e.target.value })
-  }
-
-  changeRepo = (e: Object) => {
-    this.setState({ repo: e.target.value })
-  }
-
-  getAutocompleteRepos = () => {
-    const { user } = this.state
-    if (user) {
-      fetch(`https://api.github.com/search/repositories?q=${user}&sort=stars`)
-        .then((res) => res.json())
-        .then((res) => this.setState({ autocompleteRepos: res.items.map((i) => i.name) }))
-    }
-  }
+  onChange = (e: Object) => {
+    this.setState({ q: e.target.value })
+  };
 
   fetchIssues = (page: string, perPage: string) => {
-    const { user, repo } = this.state
-    if (user && repo) {
-      this.props.search(`${user}/${repo}`, page, perPage)
+    if (this.state.q !== '') {
+      this.props.search(this.state.q, page, perPage)
     }
-  }
+  };
 
   render () {
-    const { user, repo, autocompleteRepos } = this.state
+    const { q } = this.state
     const { isFetching, page, perPage, error, issuesList } = this.props
     let query = ''
-    if (user && repo) {
+    if (q !== '') {
+      const user = q.split('/')[0]
+      const repo = q.split('/')[1]
       query = `?q=user:${user}+repo:${repo}`
     }
-    if (error) {
-      return (
-        <Error>
-          {error}
-        </Error>
-      )
-    }
+    const content =
+      error !== ''
+        ? <ErrorMessage>
+            {error}
+          </ErrorMessage>
+        : <Wrapper visible={issuesList.length > 0 && q}>
+            <PerPage active={perPage} query={query} />
+            <IssuesList query={query} />
+            <Pagination active={page} query={query} perPage={perPage} />
+          </Wrapper>
     return (
       <div>
         <SearchBar
-          changeUser={this.changeUser}
-          changeRepo={this.changeRepo}
-          getAutocompleteRepos={this.getAutocompleteRepos}
-          autocompleteRepos={autocompleteRepos}
-          user={user}
-          repo={repo}
+          onChange={this.onChange}
           perPage={this.props.perPage}
+          q={q}
           to={{ pathname: '/', search: query }}
         />
         {isFetching
           ? <Preloader />
-          : <Wrapper visible={issuesList.length > 0 && user && repo}>
-              <PerPage active={perPage} query={query} />
-              <IssuesList query={query} />
-              <Pagination active={page} query={query} perPage={perPage} />
-            </Wrapper>}
+          : content}
       </div>
     )
   }
