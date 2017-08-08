@@ -51,13 +51,13 @@ type Props = {
       issue: string
     }
   },
+  isFetching: boolean,
   details: {
     url: string,
     avatar: string,
     name: string,
     title: string,
-    content: string,
-    isFetching: boolean
+    content: string
   }
 }
 
@@ -70,8 +70,8 @@ class DetailsPage extends PureComponent {
   }
 
   render () {
-    const { url, avatar, name, title, content, isFetching } = this.props.details
-    return isFetching
+    const { url, avatar, name, title, content } = this.props.details
+    return this.props.isFetching
       ? <Preloader />
       : <Wrapper>
           <Author>
