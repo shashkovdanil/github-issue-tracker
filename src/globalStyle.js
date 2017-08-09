@@ -1,8 +1,9 @@
 const globalStyle = `
-  body {
+  html, body {
+    font-size: 16px;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     background-color: ghostwhite;
   }
 

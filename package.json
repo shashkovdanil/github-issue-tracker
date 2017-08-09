@@ -18,7 +18,6 @@
     "redux-devtools-dock-monitor": "^1.1.2",
     "redux-devtools-log-monitor": "^1.3.0",
     "redux-thunk": "^2.2.0",
-    "slug": "^0.9.1",
     "styled-components": "^2.1.1"
   },
   "scripts": {
@@ -31,7 +30,7 @@
     "lintfix:js": "eslint --fix src/ --ext .js",
     "flow": "flow",
     "flow:stop": "flow stop",
-    "deploy": "react-scripts build && cd build && now --public"
+    "deploy": "react-scripts build && cd build && now alias https://build-qwkqbcnamx.now.sh github-issue-tracker"
   },
   "devDependencies": {
     "babel-eslint": "7.2.3",

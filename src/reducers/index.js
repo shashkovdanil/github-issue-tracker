@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import issues from './visibleIssues'
+import issues from './issues'
 import pages from './pages'
 import details from './details'
 
