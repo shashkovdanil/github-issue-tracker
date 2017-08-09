@@ -30,7 +30,7 @@
     "lintfix:js": "eslint --fix src/ --ext .js",
     "flow": "flow",
     "flow:stop": "flow stop",
-    "deploy": "react-scripts build && cd build && now alias https://build-qwkqbcnamx.now.sh github-issue-tracker"
+    "deploy": "react-scripts build && cd build && now --public"
   },
   "devDependencies": {
     "babel-eslint": "7.2.3",
